@@ -23,21 +23,26 @@ def main():
         key_lst = pg.key.get_pressed() #練習10-3
         # print(key_lst[pg.K_UP], key_lst[pg.K_DOWN], key_lst[pg.K_LEFT], key_lst[pg.K_RIGHT]) 
 
-        kk_rct.move_ip(-1, 0)
+        move_default_x_speed = -1
+        move_default_y_speed = 0
+        add_x_speed = 0
+        add_y_speed = 0
+        
 
         if key_lst[pg.K_UP]:
-            kk_rct.move_ip(0, -1)
-
+            add_y_speed = -1
         if key_lst[pg.K_DOWN]:
-            kk_rct.move_ip(0, +1)
-        
-        if key_lst[pg.K_LEFT]:
-            kk_rct.move_ip(-1, 0)
-        
-        
+            add_y_speed = +1
         if key_lst[pg.K_RIGHT]:
-            kk_rct.move_ip(+2, 0)
+            add_x_speed = +2
+        if key_lst[pg.K_LEFT]:
+            add_x_speed = -1
         
+        x_speed = move_default_x_speed + add_x_speed
+        y_speed = move_default_y_speed + add_y_speed
+        
+        kk_rct.move_ip(x_speed, y_speed)
+
         x = tmr%3200 # 練習9：ループさせる
         screen.blit(bg_img, [-x, 0]) #練習5：背景画像を右から左に
         screen.blit(bg_img2, [-x+1600, 0]) #練習7：2枚目の背景画像
